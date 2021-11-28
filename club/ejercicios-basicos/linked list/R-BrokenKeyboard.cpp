@@ -3,26 +3,37 @@
 using namespace std;
 
 int main() {
-    string line, result, aux;
-    bool inserFront;
+    string line;
     
     while (getline(cin, line)) {
-        result = ""; aux = ""; inserFront = false;
+        string result = "";
+        string aux = "";
+        bool flag = false;
         for (int i = 0; i < line.size(); i++) {
             char c = line.at(i);
             if(line.at(i) != '[' && line.at(i) != ']') {
-                if(inserFront){
-                    aux.push_back(c);
-                }else {
+                if(!flag) {
                     result.push_back(c);
+                }else {
+                    aux.push_back(c);
                 }
             } else if(line.at(i) == '[') {
-                inserFront = true;
-                aux = "";
+                flag = true;
+                if(aux != "") {
+                    result = aux + result;
+                    aux = "";
+                }
             } else if(line.at(i) == ']') {
-                inserFront = false;
-                result = aux + result;
+                flag = false;
+                if(aux != "") {
+                    result = aux + result;
+                    aux = "";
+                }
             }
+        }
+        if(aux != "") {
+            result = aux + result;
+            aux = "";
         }
         cout << result << "\n";
     }
