@@ -23,16 +23,7 @@ int main () {
     }
 
     for (int i = 0; i < n; i++) {
-      movs += a[i] - mina;
-      movs += b[i] - minb;
-
-      if(a[i] > mina && b[i] > minb) {
-        if(min(a[i] - mina, b[i] - minb) == a[i] - mina) {
-          movs -= a[i] - mina;
-        } else {
-          movs -= b[i] - minb;
-        }
-      }
+      movs += a[i] - mina + b[i] - minb - min(a[i] - mina, b[i] - minb);
     }
 
     cout << movs << endl;
