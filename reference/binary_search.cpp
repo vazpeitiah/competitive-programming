@@ -35,7 +35,9 @@ int rb_search(vector<int> &v, int l, int r, int x) {
 
 /* Version iterativa de una busqueda binaria */
 
-int ib_search(vector<int> &v, int l, int r, int x) {
+int ib_search(vector<int> &v, int x) {
+  int l=0, r=v.size();
+  
   while(l<r) {
     if(v[(l+r)/2] == x) {
       return (l+r)/2;
@@ -51,6 +53,36 @@ int ib_search(vector<int> &v, int l, int r, int x) {
   } else {
     return -1;
   }
+}
+
+int lowerBound(vector<int> &array, int target) {
+  // array should be sorted in non-decreasing
+  // order from left to right
+  int l = 0, r = array.size() - 1;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    if (target <= array[m]) {
+      r = m - 1;
+    } else {
+      l = m + 1;
+    }
+  }
+  return l;
+}
+
+int upperBound(vector<int> &array, int target) {
+  // array should be sorted in non-decreasing
+  // order from left to right
+  int l = 0, r = array.size() - 1;
+  while (l <= r) {
+    int m = l + (r - l) / 2;
+    if (target < array[m]) {
+      r = m - 1;
+    } else {
+      l = m + 1;
+    }
+  }
+  return l;
 }
 
 int main () {
